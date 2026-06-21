@@ -38,6 +38,65 @@ function startGame() {
 
     deck.forEach(emoji => {
         const card = document.createElement('div');
-        card.classList.add('card')
-    })
+        card.classList.add('card');
+
+        card.innerHTML = `
+            <div class="card-inner">
+                <div class="card-face card-back"></div>
+                <div class="card-face card-front">${emoji}</div>
+            </div>
+        `;
+
+        card.addEventListener('click', () => flipCard(card, emoji));
+        grid.appendChild(card);
+    });
+}
+
+function flipCard(cardElement, emoji) {
+    if (isLocked || cardElement.classList.contains('flipped') || cardElement.classList.contains('matched')) return;
+
+    cardElement.classList.add('flipped');
+    activeCards.push({ cardElement, emoji });
+
+    if (activeCards.length === 2) {
+        moves++;
+        movesDisplay.textContent = `MOVES: ${moves}`;
+        checkMatch();
+    }
+}
+
+function checkMatch() {
+    const [card1, card2] = activeCards;
+
+    if (card1.emoji === card2.emoji) {
+            isLocked = true;
+            card1.cardElement.classList.add('matched');
+            card2.cardElement.classList.add('matched');
+            matchedPairs++;
+            foundDisplay.textContent = `FOUND: ${matchedPairs} / 18`;
+            setTimeout(() => {
+                resetBoard();
+                if (matchedPairs === 18) {
+                    showEndScreen();
+                }
+            }, 500);
+    } else {
+        isLocked = true;
+        setTimeout(() => {
+            card1.cardElement.classList.remove('flipped');
+            card2.cardElement.classList.remove('flipped');
+            resetBoard();
+        }, 1000)
+    }
+}
+
+function resetBoard() {
+    activeCards = [];
+    isLocked = false;
+}
+
+function showEndScreen()  {
+    gameScreen.classList.remove('active');
+    endScreen.classList.add('active');
+    finalStats.innerHTML = `All 18 pairs found in <b>${moves}</b> moves!`;
 }
