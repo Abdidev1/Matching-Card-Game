@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matching Card Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="start-screen" class="screem active">
+        <div class="title-box">
+            <h1>Matching Card Game</h1>
+            <button id="start-btn" class="btn">PLAY NOW</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div class="header">
+            <h2>Find the pairs!</h2>
+            <div class="stats-box">
+                <span id="found">FOUND: 0/18</span>
+                <span id="mover">MOVES: 0</span>
+            </div>
+        </div>
+        <div id="grid" class="grid-6x6"></div>
+    </div>
+
+    <div id="end-screen" class="screen">
+        <div class="title-box">
+            <h1>You Won!</h1>
+            <p id="final-stats"></p>
+            <button id="restart-btn" class="btn">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
