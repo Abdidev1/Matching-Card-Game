@@ -2,7 +2,7 @@ const startScreen = document.getElementById('start-screen');
 const gameScreen = document.getElementById('game-screen');
 const endScreen = document.getElementById('end-screen');
 const grid = document.getElementById('grid');
-const movesDisplay = document.getElementById('moves');
+const movesDisplay = document.getElementById('mover');
 const foundDisplay = document.getElementById('found');
 const finalStats = document.getElementById('final-stats');
 
